@@ -17,7 +17,6 @@ function submitForm(e) {
   );
 
   state.items.push(array);
-  console.log(state.items);
 
   saveLocalTodos(array);
 
@@ -25,6 +24,7 @@ function submitForm(e) {
   createItem(array);
 }
 
+//render Item
 function createItem(array) {
   //create Item
   let tdElementName = document.createElement("td");
@@ -50,6 +50,7 @@ function createItem(array) {
   trElement.appendChild(deleteBtn);
 }
 
+//check Localstorage
 function checkLocalItem() {
   if (localStorage.getItem("item") === null) {
     state.items;
@@ -58,13 +59,14 @@ function checkLocalItem() {
   }
 }
 
-//save todo in localstorage
+//save item in localstorage
 function saveLocalTodos(item) {
   checkLocalItem();
   state.items.push(item);
   localStorage.setItem("item", JSON.stringify(state.items));
 }
 
+//load item from localstorage
 function getItems() {
   checkLocalItem();
   state.items.forEach(function (item) {
@@ -84,10 +86,12 @@ function deleteItemfromArray(e) {
       (x) => x.name === deleteItem.firstChild.innerText
     );
     state.items.splice(index, 1);
+    //udate localStorage
     localStorage.setItem("item", JSON.stringify(state.items));
   }
 }
 
+//all EventListener
 function eventListener() {
   formular.addEventListener("submit", submitForm);
   document.addEventListener("DOMContentLoaded", getItems);
