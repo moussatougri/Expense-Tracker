@@ -3,8 +3,6 @@ const formularInp = document.querySelectorAll("#formular input");
 const formular = document.querySelector(".formular");
 const table = document.querySelector(".table");
 
-const submitbtn = document.querySelector(".submit-btn");
-
 //state Form
 const state = {
   items: [],
@@ -19,6 +17,7 @@ function submitForm(e) {
   );
 
   state.items.push(array);
+  console.log(state.items);
 
   saveLocalTodos(array);
 
@@ -78,25 +77,20 @@ function deleteItemfromArray(e) {
   const item = e.target;
   if (item.classList[0] === "trash-btn") {
     //delete item from the window
-    const deleteItem = items.parentElement;
+    const deleteItem = item.parentElement;
     deleteItem.remove();
     //delete item from an array
     const index = state.items.findIndex(
-      (x) => x.description === deleteItem.innerText
+      (x) => x.name === deleteItem.firstChild.innerText
     );
     state.items.splice(index, 1);
-    localStorage.setItem("todos", JSON.stringify(state.items));
+    localStorage.setItem("item", JSON.stringify(state.items));
   }
 }
 
 function eventListener() {
   formular.addEventListener("submit", submitForm);
   document.addEventListener("DOMContentLoaded", getItems);
-  formular.addEventListener("keyup", function (e) {
-    if (e.key === "Enter") {
-      submitForm(e);
-    }
-  });
 }
 
 eventListener();
