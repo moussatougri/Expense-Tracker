@@ -23,7 +23,10 @@ function submitForm(e) {
   saveLocalTodos(array);
 
   //render Item
+  createItem(array);
+}
 
+function createItem(array) {
   //create Item
   let tdElementName = document.createElement("td");
   let tdElementDate = document.createElement("td");
@@ -66,27 +69,7 @@ function saveLocalTodos(item) {
 function getItems() {
   checkLocalItem();
   state.items.forEach(function (item) {
-    //render Item
-    let tdElementName = document.createElement("td");
-    let tdElementDate = document.createElement("td");
-    let tdElementAmount = document.createElement("td");
-    const trElement = document.createElement("tr");
-    tdElementName.innerText = item.name;
-    tdElementDate.innerText = item.date;
-    tdElementAmount.innerText = item.amount;
-
-    //delete Item
-    const trForDeleteSection = document.createElement("tr");
-    const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("trash-btn");
-
-    //appendchild
-    table.appendChild(trElement);
-    table.appendChild(trForDeleteSection);
-    trElement.appendChild(tdElementName);
-    trElement.appendChild(tdElementDate);
-    trElement.appendChild(tdElementAmount);
-    trElement.appendChild(deleteBtn);
+    createItem(item);
   });
 }
 
